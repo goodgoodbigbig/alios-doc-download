@@ -29,7 +29,8 @@ def downloadMD(child):
     content = json.loads(resp.text)['data']['content']
     newContent = ''
     for line in content.split('\n'):
-        line = line.replace(' &quot;&quot;)', ')') # md中愈发错误特殊处理
+        line = line.replace(' &quot;&quot;)', ')') # md中语法错误特殊处理
+        line = line.replace('&quot;', '"')
         wirtePath = os.path.join(TARGET_DIR, gitFilePath)
 
         # Alios中的错误md语法

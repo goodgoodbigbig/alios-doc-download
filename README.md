@@ -10,3 +10,5 @@ AliOS 开发文档镜像
 pip install requests
 python3 download.py
 ```
+
+> 若下载失败，请替换cookie
