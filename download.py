@@ -40,16 +40,22 @@ def downloadMD(child):
                 line += '\n [%s](%s)\n' % (errorSyntax, errorSyntax)
             else:
                 line += '\n ![%s](%s)\n' % (errorSyntax, errorSyntax)
-
+        
+        # 下载附件和图片
         attatchFileUrls = re.findall(r'\[.*\]\((.+png|.+jpg|.+gif|.+zip)\)', line)
         for attatchFile in attatchFileUrls:
             attatchFile = attatchFile.strip()
             if downloadMDAttatchFile(attatchFile, os.path.dirname(wirtePath)):
                 parse = urlparse(attatchFile)
                 line = line.replace(parse.scheme + "://" + parse.netloc + "/", "")
-
-        # 错误语法，[]: xxx.zip形式
         
+        # 处理相对链接
+        if 'md/developercenter/' in line:
+            slashCount = len(re.findall('/', gitFilePath))
+            preDot = ''
+            for _ in range(0, slashCount):
+                preDot += '../'
+            line = line.replace('md/developercenter/', preDot + 'md/developercenter/').replace('|local', '')
 
         newContent = newContent + line + "\n"
         # save md file
