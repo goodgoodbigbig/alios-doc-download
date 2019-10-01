@@ -33,14 +33,14 @@ def downloadMD(child):
         wirtePath = os.path.join(TARGET_DIR, gitFilePath)
 
         # Alios中的错误md语法
-        errorSyntaxs = re.findall(r'\[.+\]: (.+png|.+jpg|.+gif|.+zip)', line)
+        errorSyntaxs = re.findall(r'\[.*\]: (.+png|.+jpg|.+gif|.+zip)', line)
         for errorSyntax in errorSyntaxs:
             if errorSyntax.endswith('.zip'):
                 line += '\n [%s](%s)\n' % (errorSyntax, errorSyntax)
             else:
                 line += '\n ![%s](%s)\n' % (errorSyntax, errorSyntax)
 
-        attatchFileUrls = re.findall(r'\[.+\]\((.+png|.+jpg|.+gif|.+zip)\)', line)
+        attatchFileUrls = re.findall(r'\[.*\]\((.+png|.+jpg|.+gif|.+zip)\)', line)
         for attatchFile in attatchFileUrls:
             attatchFile = attatchFile.strip()
             if downloadMDAttatchFile(attatchFile, os.path.dirname(wirtePath)):
