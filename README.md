@@ -12,3 +12,5 @@ python3 download.py
 ```
 
 > 若下载失败，请替换cookie
+
+已归档文：[release](https://github.com/goodgoodbigbig/alios-doc-download/releases)
